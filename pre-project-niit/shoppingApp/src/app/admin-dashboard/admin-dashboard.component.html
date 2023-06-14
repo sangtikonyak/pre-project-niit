@@ -1,0 +1,95 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mx-5">
+        <li class="nav-item dropdown">
+            <span class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Hi
+            </span>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" routerLink="../add-product">Add New Product</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        <li class="nav-item active px-1">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item px-1">
+          <a class="nav-link" href="#">services</a>
+        </li>
+       
+      </ul>
+        
+            <input class="form-control mr-sm-1 " type="search" placeholder="Search" aria-label="Search" [(ngModel)]="productName">
+            <button class="btn btn-outline-success my-1 my-sm-0" (click)="searchProduct()">Search</button>
+        
+      </div>
+      <div class="btn">
+        <button type="button" class="btn btn-light" (click)="logout()">logout</button>
+      </div>
+  </nav>
+<h3 style="text-align: center;">Product Details</h3>
+
+<div class="container-fluid">
+    <table class="table">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Product Name</th>
+            <th scope="col">Product Description</th>
+            <th scope="col">Product price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products;let i=index">
+            <th scope="row">{{i+1}}</th>
+            <td>{{product.productName}}</td>
+            <td>{{product.productDesc}}</td>
+            <td>{{product.price}}</td>
+            <td>
+                <button type="button" class="btn btn-primary" (click)="getProduct(product)">update</button>
+                <button type="button" class="btn btn-danger ml-1" (click)="deleteProduct(product.productId)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<section class="card-body py-5 px-md-5 text-center" *ngIf="updateForm">
+  <form (ngSubmit)="update(product)" #product="ngForm">
+    <div class="row d-flex justify-content-center">
+      <div class="col-md-4">
+        <h2 class="fw-bold mb-5">Update</h2>
+        <mat-form-field class="example-form" appereance="fill">
+          <mat-label>Product Id</mat-label>
+          <input matInput type="text" name="productId" id="producdId" [value]="productDetails.productId" #productId="ngModel" [(ngModel)]="productDetails.productId" readonly/>
+        </mat-form-field>
+
+    <mat-form-field class="example-form" appereance="fill">
+      <mat-label>Product Name</mat-label>
+      <input matInput type="text" name="productName" id="productName" [value]="productDetails.productName" #productId="ngModel" [(ngModel)]="productDetails.productName">
+    </mat-form-field>
+
+    <mat-form-field class="example-form" appereance="fill">
+      <mat-label>Product Description</mat-label>
+      <input matInput type="text" name="productDesc" id="productDesc" [value]="productDetails.productDesc" #productDesc="ngModel" [(ngModel)]="productDetails.productDesc" />
+  </mat-form-field>
+
+    <mat-form-field class="example-form" appereance="fill">
+      <mat-label>Price</mat-label>
+      <input matInput type="text" name="price" id="price" [value]="productDetails.price" #price="ngModel" [(ngModel)]="productDetails.price"/>
+  </mat-form-field>
+  <button type="submit" class="btn btn-primary  mb-4">
+    Submit
+  </button>
+</div>
+</div>
+  </form>
+
+  </section>
+  

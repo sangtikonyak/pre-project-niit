@@ -1,0 +1,64 @@
+version: "3.9"
+services:
+  mongo-service:
+    image: mongo:latest
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+    networks:
+      - shopping-network
+
+  mysql-service:
+    image: mysql:latest
+    container_name: mysql-container
+    ports:
+      - "3306:3306"
+    networks:
+      - shopping-network
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: root
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+
+
+  user-authentication-service:
+    container_name: user-authentication-container
+    build: userauthentication/
+    ports:
+      - "8080:8080"
+    networks:
+      - shopping-network
+    depends_on:
+      - mysql-service
+    restart: always
+  api-gateway:
+    container_name: api-gateway-container
+    networks:
+      - shopping-network
+    ports:
+      - "9000:9000"
+    build: ApiGateway/
+
+  product-service:
+    container_name: product-container
+    build: ProductApp/
+    networks:
+      - shopping-network
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo-service
+    restart: always
+
+  eureka-service:
+    container_name: eureka-service
+    ports:
+      - "8761:8761"
+    networks:
+      - shopping-network
+    build: EurekaServer/
+
+networks:
+  shopping-network:
+    driver: bridge

@@ -1,0 +1,21 @@
+<app-header></app-header>
+
+    <mat-card class="example-card" *ngFor="let p of products">
+        <mat-card-header>
+          <mat-card-title>{{p.productName}}</mat-card-title>
+          <mat-card-subtitle>{{p.productName}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="">
+        <mat-card-content>
+          <p>
+           {{p.productDesc}}
+          </p>
+          <p>{{p.price}}</p>
+        </mat-card-content>
+        <mat-card-actions>
+            <button type="button" class="btn btn-dark">Buy</button>
+            <button type="button" class="btn btn-dark" id="btn-prd" (click)="addProductToCart(p)">Add To Cart</button>
+        </mat-card-actions>
+      </mat-card>
+
+

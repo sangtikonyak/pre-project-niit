@@ -1,0 +1,42 @@
+<section class="text-center">
+<form (ngSubmit)="addProductToDatabase()" #addProduct="ngForm">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-4">
+            <h2 class="fw-bold mb-5">Add New Poduct</h2>
+        <mat-form-field class="example-form" appearance="fill">
+            <mat-label>Product Id</mat-label>
+            <input matInput type="text" name="producId" [(ngModel)]="product.productId" #productId = "ngModel" required>
+            <span *ngIf = "productId?.invalid && (productId?.dirty || productId?.touched)">
+                <span *ngIf="productId?.hasError?.('required')">Product Id is Required</span>
+            </span>
+        </mat-form-field>
+
+        <mat-form-field class="example-form" appearance="fill">
+            <mat-label>Product Name</mat-label>
+            <input matInput type="text" name="productName" [(ngModel)]="product.productName" #productName = "ngModel" required>
+            <span *ngIf = "productName?.invalid && (productName?.dirty || productName?.touched)">
+                <span *ngIf="productName.hasError?.('required')">Product Name is Required</span>
+            </span>
+        </mat-form-field>
+
+        <mat-form-field class="example-form" appearance="fill">
+            <mat-label>Product Description</mat-label>
+            <input matInput type="text"  name="productDesc" [(ngModel)]="product.productDesc" #productDesc = "ngModel" required>
+            <span *ngIf = "productDesc?.invalid && (productDesc?.dirty || productDesc?.touched)">
+                <span *ngIf="productDesc?.hasError?.('required')">product Descrition is Required</span>
+            </span>
+        </mat-form-field>
+        <mat-form-field class="example-form" appearance="fill">
+            <mat-label>Product price</mat-label>
+            <input matInput type="number"  name="price" [(ngModel)]="product.price" #price = "ngModel" required>
+            <span *ngIf = "price?.invalid && (price?.dirty || price?.touched)">
+                <span *ngIf="price?.hasError?.('required')">Product price is Required</span>
+            </span>
+        </mat-form-field>
+    <div >
+        <button class="btn btn-primary mb-4" type="submit" style="max-width: 100%;"[disabled]="!addProduct.valid">Add Product</button>
+      </div>
+</div>
+</div>
+</form>
+</section>
